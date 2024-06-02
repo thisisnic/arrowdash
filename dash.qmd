@@ -1,6 +1,6 @@
 --- 
 title: "Arrow Maintainer Dashboard"
-author: "Alenka Frim and Nic Crane"
+author: "Alenka Frim & Nic Crane"
 format: 
   dashboard:
     logo: images/arrow-logo_horizontal_black-txt_transparent-bg.png
