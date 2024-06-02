@@ -7,6 +7,7 @@ format:
     nav-buttons: 
       - github
       - href: https://github.com/thisisnic/arrowdash/
+server: shiny
 ---
 
 <!-- 
@@ -99,7 +100,7 @@ ggplot(data, aes(x = factor(username, levels = username), y = commit_count)) +
 
 ```{r}
 library(shiny)
-selectInput('x', 'Language', c("Python", "R")) 
+selectInput('language', 'Language', c("Python", "R")) 
 ```
 
 ## Row
@@ -107,9 +108,18 @@ selectInput('x', 'Language', c("Python", "R"))
 ### Column {width=50%}
 
 ```{r}
+library(gt)
+gt_output("issues_tbl")
+```
+
+
+```{r}
 #| title: Issues
+#| context: server
 # Load the gt package for table formatting
 library(gt)
+library(dplyr)
+library(stringr)
 
 # Create a vector of realistic issue titles for bugs and feature requests for Arrow
 issues <- c(
@@ -143,17 +153,22 @@ issues <- sample(issues, 20, replace = TRUE)
 dates <- seq(Sys.Date(), Sys.Date() - 19, by = "-1 day")
 
 # Create the data frame
-df <- data.frame(
+df <- reactive({
+  data.frame(
   date = dates,
-  subject = issues
-)
-
-df |> 
+  subject = issues) %>%
+  mutate(language = stringr::str_extract(issues, "^\\[.*\\]") %>% stringr::str_remove_all("\\[|\\]")) %>%
+  filter(language == input$language)
+})
+  
+  
+output$issues_tbl <- render_gt(
+  df() |> 
   gt() |> 
   tab_source_note(
     source_note = md(paste("Retrieved from the [Arrow Issues Tracker](https://github.com/apache/arrow/issues) at", format(lubridate::now(), "%Y/%m/%d %H:%M %Z")))
   )
-
+)
 ```
 
 ### Column {width=50%}
