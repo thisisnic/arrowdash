@@ -3,9 +3,11 @@ title: "Arrow Maintainer Dashboard"
 format: 
   dashboard:
     logo: ./images/arrow-logo.png
+    theme: pulse
     nav-buttons: 
       - github
       - href: https://github.com/thisisnic/arrowdash/
+
 ---
 
 <!-- 
