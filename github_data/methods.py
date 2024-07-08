@@ -145,7 +145,7 @@ def get_new_contributors_open(df):
 def get_summary(df):
     """
     Count the number of issues or pull requests by creation date selected from
-    the data frame with issues or pull requests. Count only issues or pull requests.
+    the data frame with issues or pull requests. Count only issues or pull requests
     created in last 3 months.
 
     Parameters
