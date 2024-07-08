@@ -10,15 +10,13 @@ Last updated: `{r} update_time`
 issues, prs = gha.get_all(data, lang)
 
 issues_open = gha.get_open(issues)
-
 prs_open = gha.get_open(prs)
 
 issues_new_open = gha.get_new_contributors_open(issues)
-
 prs_new_open = gha.get_new_contributors_open(prs)
 
-issues_sum = gha.get_summary(issues)
-prs_sum = gha.get_summary(prs)
+fig_issues = gha.get_summary(issues)
+fig_prs = gha.get_summary(prs)
 ```
 
 ## Row  {height="20%"}
@@ -80,12 +78,7 @@ dt_show_buttons(py$issues_open)
 
 ```{python}
 #| title: Open issues by week
-import altair as alt
-
-alt.Chart(issues_sum).mark_bar(cornerRadius=10).encode(
-    x=alt.X("created_at:N").axis(labelAngle=-45).title("Week"),
-    y=alt.Y("labels:Q").title("Number of issues")
-)
+fig_issues.show()
 ```
 
 ### PRs
@@ -102,11 +95,7 @@ dt_show_buttons(py$prs_new_open)
 dt_show_buttons(py$prs_open)
 ```
 
-
 ```{python}
 #| title: Open PRs by week
-alt.Chart(prs_sum).mark_bar(cornerRadius=10).encode(
-    x=alt.X("created_at:N").axis(labelAngle=-45).title("Week"),
-    y=alt.Y("labels:Q").title("Number of prs")
-)
+fig_prs.show()
 ```
