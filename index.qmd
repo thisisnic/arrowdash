@@ -24,6 +24,11 @@ library(DT)
 library(dplyr)
 
 if(Sys.getenv("GITHUB_ACTIONS") == ""){
+  virtualenv_create("r-arrow-dash")
+  py_install("pandas", envname = "r-arrow-dash")
+  py_install("itables", envname = "r-arrow-dash")
+  py_install("plotly", envname = "r-arrow-dash")
+  py_install("requests", envname = "r-arrow-dash")
   use_virtualenv("r-arrow-dash")
 }
 
