@@ -2,7 +2,7 @@
 
 Quarto dashboard for simplifying project maintenance and monitoring
 important metrics for tracking project sustainability.
-
+ 
 ## Setup for local development
 
 For local development both Python and R need to be installed.
